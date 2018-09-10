@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+version = 0.1
+
+sourceCompatibility = 1.8
+
+jar {
+    //清单文件配置
+    manifest {
+        //启动类
+        attributes 'Main-Class': 'com.yunbo.gia.todo.ToDoApp'
+    }
+}
