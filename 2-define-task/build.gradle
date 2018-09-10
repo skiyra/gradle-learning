@@ -20,6 +20,10 @@ println tasks.class
 println tasks.size()
 }
 
+tasks.create(name: 'myHello') << {
+    println "hello4"
+}
+
 task hello7 << {
 description = "this is hello7"
 println description

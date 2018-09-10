@@ -19,3 +19,4 @@ task showProperties << {
 task showCommandLieProperties << {
     println property3
 }
+

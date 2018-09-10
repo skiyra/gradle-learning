@@ -1,0 +1,80 @@
+添加 Maven 仓库
+repositories {
+    mavenCentral()
+}
+-----------------------------------------------------------------------------
+添加依赖
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+-----------------------------------------------------------------------------
+
+自定义 MANIFEST.MF
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+}
+
+
+为 test 添加系统属性
+-----------------------------------------------------------------------------
+test {
+    systemProperties 'property': 'value'
+}
+
+-----------------------------------------------------------------------------
+发布 jar 包
+如何发布 jar 包?你需要告诉 Gradle 发布到到哪。在 Gradle 中 jar 包通常被发布到某个仓库中。
+在下面的例子中，我们会将 jar 包发布到本地目录。当然你也可以发布到远程仓库或多个远程仓库中
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+执行 gradle uploadArchives 以发布 jar 包
+
+-----------------------------------------------------------------------------
+repositories {
+    maven {
+        url "http://repo.mycompany.com/maven2"
+    }
+}
+
+-----------------------------------------------------------------------------
+发布到 Maven 仓库
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://localhost/tmp/myRepo/")
+        }
+    }
+}
+
+-----------------------------------------------------------------------------
+自定义 Java 源代码布局
+sourceSets {
+    main {
+        java {
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+
+
+
+
+
+

@@ -1,7 +1,9 @@
 Gradle从入门到提高系列（三）—— 读懂Gradle
 
-Gradle是一种声明式的构建工具。在执行时，Gradle并不会一开始便顺序执行build.gradle文件中的内容，而是分为两个阶段，第一个阶段是配置阶段，然后才是实际的执行阶段。在
-配置阶段，Gradle将读取所有build.gradle文件的所有内容来配置Project和Task等，比如设置Project和Task的Property，处理Task之间的依赖关系等。
+Gradle是一种声明式的构建工具。在执行时，Gradle并不会一开始便顺序执行build.gradle文件中的内容，而是分为两个阶段，
+第一个阶段是配置阶段，然后才是实际的执行阶段。
+在配置阶段，Gradle将读取所有build.gradle文件的所有内容来配置Project和Task等，
+比如设置Project和Task的Property，处理Task之间的依赖关系等。
 
 虽然很多时候我们只需要照着网上的例子写自己的DSL语句就行了，但是此时我们所知道的也就只有这么多。另一方面，如果我们能够了解Gradle DSL的内部工作机制，那么我们便可以达到
 举一反三的效果。
