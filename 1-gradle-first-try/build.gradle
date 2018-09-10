@@ -57,6 +57,60 @@ happy << {
     println 'Hello Jupiter'
 }
 
+task myTask {
+    ext.myProperty = 'myValue'
+}
+
+task printTaskProperties << {
+    println myTask.myProperty
+}
+
+defaultTasks 'clean','run'
+task clean << {
+    println 'Default Cleaning!'
+}
+task run << {
+    println 'Default Running!'
+}
+
+
+task distribution << {
+    println "We build the zip with version=$version"
+}
+task release(dependsOn: 'distribution') << {
+    println "We release now"
+}
+gradle.taskGraph.whenReady {taskGraph ->
+    if (taskGraph.hasTask(release)) {
+        version = "1.0"
+    } else {
+        version = "1.0-SNAPSHOT"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

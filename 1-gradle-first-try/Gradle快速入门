@@ -234,6 +234,51 @@ happy << {
     println 'Hello Jupiter'
 }
 
+-----------------------------------------------------------------------------
+为任务增加自定义属性
+task myTask {
+    ext.myProperty = "myValue"
+}
+
+task printTaskProperties << {
+    println myTask.myProperty
+}
+
+gradle -q printTaskProperties
+
+-----------------------------------------------------------------------------
+定义默认任务
+defaultTasks 'clean', 'run'
+task clean << {
+    println 'Default Cleaning!'
+}
+task run << {
+    println 'Default Running!'
+}
+task other << {
+    println "I'm not a default task!"
+}
+
+-----------------------------------------------------------------------------
+依赖任务的不同输出
+task distribution << {
+    println "We build the zip with version=$version"
+}
+task release(dependsOn: 'distribution') << {
+    println "We release now"
+}
+gradle.taskGraph.whenReady {taskGraph ->
+    if (taskGraph.hasTask(release)) {
+        version = "1.0"
+    } else {
+        version = "1.0-SNAPSHOT"
+    }
+}
+
+whenReady 会在已发布的任务之前影响到已发布任务的执行。
+即使已发布的任务不是主要任务(也就是说，即使这个任务不是通过命令行直接调用)
+
+
 
 
 
